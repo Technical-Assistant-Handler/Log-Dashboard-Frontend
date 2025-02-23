@@ -2,6 +2,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter/material.dart';
 
+String ip_adress = "0.0.0.0";
+
 Future<Map<String, dynamic>> authentication(
   String inputTpnumber,
   String inputPassword,
