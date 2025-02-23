@@ -10,7 +10,7 @@ Future<Map<String, dynamic>> authentication(
 ) async {
   try {
     final response = await http.post(
-      Uri.parse('http://127.0.0.1:8000/authenticate'),
+      Uri.parse('http://$ip_adress:8000/authenticate'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -46,7 +46,7 @@ Future<Map<String, dynamic>> authentication(
 Future<Map<String, dynamic>> get_user_log_data() async {
   try {
     final response = await http.get(
-      Uri.parse('http://127.0.0.1:8000/user_log_data'),
+      Uri.parse('http://$ip_adress:8000/user_log_data'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -89,7 +89,7 @@ Future<Map<String, dynamic>> get_user_log_data() async {
 Future<Map<String, dynamic>> logout(String tpnumber) async {
   try {
     final response = await http.post(
-      Uri.parse('http://127.0.0.1:8000/logout'),
+      Uri.parse('http://$ip_adress:8000/logout'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -125,7 +125,7 @@ Future<Map<String, dynamic>> logout(String tpnumber) async {
 Future<Map<String, dynamic>> generate_otp(String tpnumber) async {
   try {
     final response = await http.post(
-      Uri.parse('http://127.0.0.1:8000/generate_otp'),
+      Uri.parse('http://$ip_adress:8000/generate_otp'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -165,7 +165,7 @@ Future<Map<String, dynamic>> update_password(
 ) async {
   try {
     final response = await http.post(
-      Uri.parse('http://127.0.0.1:8000/update_password'),
+      Uri.parse('http://$ip_adress:8000/update_password'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
