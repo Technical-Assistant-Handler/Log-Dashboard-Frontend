@@ -39,10 +39,17 @@ class LoggedInTableState extends State<LoggedInTable> {
     try {
       final logData = await get_user_log_data();
       debugPrint('Log data fetched: $logData');
-      if (logData['status'] == true &&
-          logData['data'] != null &&
-          logData['data'].isNotEmpty) {
-        initializeTable(logData['data']);
+
+      if (logData['status'] == true && logData['data'] != null) {
+        // Ensure 'data' is a List before using it
+        final userData = logData['data'];
+
+        if (userData is List && userData.isNotEmpty) {
+          initializeTable(userData);
+        } else {
+          debugPrint(
+              'Warning: Expected a List, but got ${userData.runtimeType}');
+        }
       }
     } catch (e) {
       debugPrint('Error fetching log data: $e');

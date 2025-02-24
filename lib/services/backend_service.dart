@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter/material.dart';
 
-String ip_adress = "0.0.0.0";
+String ip_adress = "10.101.36.155";
 
 Future<Map<String, dynamic>> authentication(
   String inputTpnumber,
@@ -47,41 +47,29 @@ Future<Map<String, dynamic>> get_user_log_data() async {
   try {
     final response = await http.get(
       Uri.parse('http://$ip_adress:8000/user_log_data'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
+      headers: {'Content-Type': 'application/json; charset=UTF-8'},
     );
 
     if (response.statusCode == 200) {
-      final result = json.decode(response.body);
-      debugPrint('User log data result: $result');
+      final Map<String, dynamic> result = json.decode(response.body);
 
-      if (result['status'] == false || result.isEmpty || result == []) {
+      if (result['status'] == false) {
         return {
           'status': false,
           'data': [],
-          'message': 'No data available',
+          'message': result['message'] ?? 'No data available',
         };
       } else {
-        return {
-          'status': true,
-          'data': result,
-        };
+        return {'status': true, 'data': result['data']};
       }
     } else {
       print(
           'Failed to fetch user log data. Status code: ${response.statusCode}');
-      return {
-        'status': false,
-        'message': 'Failed to fetch user log data',
-      };
+      return {'status': false, 'message': 'Failed to fetch user log data'};
     }
   } catch (e) {
     print('Error fetching user log data: $e');
-    return {
-      'status': false,
-      'message': 'Error fetching user log data',
-    };
+    return {'status': false, 'message': 'Error fetching user log data'};
   }
 }
 
